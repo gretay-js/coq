@@ -420,7 +420,8 @@ bin/%.opt$(EXE): topbin/%_bin.ml $(LINKCMX) $(LIBCOQRUN)
 	$(SHOW)'COQMKTOP -o $@'
 	$(HIDE)$(OCAMLOPT) -linkall -linkpkg $(MLINCLUDES) \
 			   $(SYSMOD) -package camlp5.gramlib \
-			   $(LINKCMX) $(OPTFLAGS) $(LINKMETADATA) $< -o $@
+			   $(LINKCMX) $(OPTFLAGS) $(LINKMETADATA) \
+			   -ccopt -Wl,--script=linker-script $< -o $@
 	$(STRIP_HIDE) $@
 	$(CODESIGN_HIDE) $@
 
